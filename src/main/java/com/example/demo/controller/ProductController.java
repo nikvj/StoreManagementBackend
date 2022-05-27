@@ -55,7 +55,7 @@ public class ProductController {
         return "Deleted Successfully";
     }
 
-    @GetMapping("/searchByCode")
+    @GetMapping("/searchByCode/{code}")
     public ProductResponse searchProductByCode(@PathVariable("code")
                                                Optional<String> productCode) {
         ProductResponse response = new ProductResponse();
