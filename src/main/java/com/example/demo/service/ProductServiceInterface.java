@@ -4,6 +4,7 @@ import com.example.demo.models.Products;
 import com.example.demo.requestModels.DeleteRequestModel;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductServiceInterface {
     Products saveProduct(Products product);
@@ -17,4 +18,6 @@ public interface ProductServiceInterface {
 //    List<Products> updateProductStatus(List<Products> products);
 
     void deleteSelectedProductById(DeleteRequestModel ids);
+
+    Products searchProductByCode(Optional<String> productCode);
 }

@@ -2,12 +2,14 @@ package com.example.demo.controller;
 
 import com.example.demo.models.Products;
 import com.example.demo.requestModels.DeleteRequestModel;
+import com.example.demo.responseModels.ProductListResponse;
 import com.example.demo.responseModels.ProductResponse;
 import com.example.demo.service.ProductServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -24,8 +26,8 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    public ProductResponse fetchProductList() {
-        ProductResponse response = new ProductResponse();
+    public ProductListResponse fetchProductList() {
+        ProductListResponse response = new ProductListResponse();
         List<Products> productsList = productServiceInterface.fetchProductsList();
         response.setProducts(productsList);
         return response;
@@ -52,4 +54,14 @@ public class ProductController {
         productServiceInterface.deleteSelectedProductById(ids);
         return "Deleted Successfully";
     }
+
+    @GetMapping("/searchByCode")
+    public ProductResponse searchProductByCode(@PathVariable("code")
+                                               Optional<String> productCode) {
+        ProductResponse response = new ProductResponse();
+        Products product = productServiceInterface.searchProductByCode(productCode);
+        response.setProduct(product);
+        return response;
+    }
+
 }

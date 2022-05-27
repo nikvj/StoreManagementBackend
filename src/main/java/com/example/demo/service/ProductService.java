@@ -8,10 +8,9 @@ import com.example.demo.utility.StatusEnum;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -103,22 +102,15 @@ public class ProductService implements ProductServiceInterface {
         }
     }
 
-   /* @Override
-    public List<Products> updateProductStatus(List<Products> productsList) {
-        List<Products> products = new ArrayList<>();
-        for (Products p:
-                productsList) {
-            if (p.getQuantity() > 5){
-                p.setStatus(StatusEnum.INSTOCK.toString());
-                products.add(p);
-            } else if (p.getQuantity() >= 1 && p.getQuantity() <= 5) {
-                p.setStatus(StatusEnum.RUNNINGOUTOFSTOCK.toString());
-                products.add(p);
-            }else {
-                p.setStatus(StatusEnum.OUTOFSTOCK.toString());
-                products.add(p);
-            }
+    @Override
+    public Products searchProductByCode(Optional<String> productCode) {
+        try {
+            ProductEntity productEntity = productRepository.productByCode(productCode);
+            Products product = new Products();
+            BeanUtils.copyProperties(productEntity, product);
+            return product;
+        }catch (Exception e) {
+            throw e;
         }
-        return products;
-    }*/
+    }
 }
