@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.ProductEntity;
 import com.example.demo.models.Products;
 import com.example.demo.requestModels.DeleteRequestModel;
 
@@ -20,4 +21,6 @@ public interface ProductServiceInterface {
     void deleteSelectedProductById(DeleteRequestModel ids);
 
     Products searchProductByCode(Optional<String> productCode);
+
+    ProductEntity getProductById(Long product_id);
 }

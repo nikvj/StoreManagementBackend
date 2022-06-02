@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> {
 
-    @Query(value = "select * from customer c where c.contact= ?1", nativeQuery = true)
-    CustomerEntity customerByContact(Optional<Long> contact);
+    @Query(value = "select * from customer c where c.contact=?1", nativeQuery = true)
+    CustomerEntity customerByContact(Long contact);
 }

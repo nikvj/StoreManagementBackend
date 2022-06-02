@@ -1,6 +1,6 @@
 package com.example.demo.models;
 
-import com.example.demo.requestModels.BuyingProducts;
+import com.example.demo.requestModels.BoughtProductsRequestModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,5 +15,5 @@ public class InvoiceHistory {
     private Long invoice_id;
     private Integer total_amount;
     private Customer customer;
-    private List<BuyingProducts> products;
+    private List<BoughtProductsRequestModel> products;
 }

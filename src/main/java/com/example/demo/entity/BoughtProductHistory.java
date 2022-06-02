@@ -7,17 +7,18 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "invoice_history")
+@Table(name = "bought_product_history")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class InvoiceHistoryEntity {
+public class BoughtProductHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long invoice_id;
-    private Integer total_amount;
+    private Integer product_quantity;
+    private Integer product_amount;
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private CustomerEntity customer;
+    @JoinColumn(name = "product_id")
+    private ProductEntity product;
 }

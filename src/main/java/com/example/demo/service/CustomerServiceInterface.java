@@ -1,8 +1,12 @@
 package com.example.demo.service;
 
-import com.example.demo.models.Customer;
+import com.example.demo.entity.CustomerEntity;
 
 public interface CustomerServiceInterface {
 
-    Long addCustomer(Customer customer);
+    CustomerEntity addCustomer(CustomerEntity customer);
+
+    CustomerEntity getCustomerByContact(Long contact);
+
+    CustomerEntity getCustomerById(Long customerId);
 }

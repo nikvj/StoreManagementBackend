@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BuyingProducts {
-    private Long product_id;
+public class BoughtProductsRequestModel {
     private Integer product_quantity;
     private Integer product_amount;
+    private Long product_id;
 }

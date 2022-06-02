@@ -113,4 +113,9 @@ public class ProductService implements ProductServiceInterface {
             throw e;
         }
     }
+
+    @Override
+    public ProductEntity getProductById(Long product_id) {
+        return productRepository.getById(product_id);
+    }
 }

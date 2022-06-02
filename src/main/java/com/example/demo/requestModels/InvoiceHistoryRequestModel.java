@@ -15,5 +15,5 @@ public class InvoiceHistoryRequestModel {
     private Long invoice_id;
     private Integer total_amount;
     private Customer customer;
-    private List<BuyingProducts> products;
+    private List<BoughtProductsRequestModel> products;
 }
