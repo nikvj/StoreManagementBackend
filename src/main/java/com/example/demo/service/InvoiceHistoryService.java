@@ -93,4 +93,9 @@ public class InvoiceHistoryService implements InvoiceHistoryServiceInterface{
         }
         return false;
     }
+
+    @Override
+    public InvoiceHistoryEntity getInvoiceHistoryByInvoiceId(Long invoice_id) {
+        return invoiceHistoryRepository.invoiceById(invoice_id);
+    }
 }

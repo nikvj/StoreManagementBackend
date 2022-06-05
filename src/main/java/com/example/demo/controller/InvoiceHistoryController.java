@@ -1,18 +1,17 @@
 package com.example.demo.controller;
 
-import com.example.demo.models.BoughtProductHistory;
+import com.example.demo.entity.BoughtProductHistory;
+import com.example.demo.entity.InvoiceHistoryEntity;
 import com.example.demo.models.Customer;
 import com.example.demo.requestModels.BoughtProductsRequestModel;
 import com.example.demo.requestModels.InvoiceHistoryRequestModel;
 import com.example.demo.responseModels.IdResponse;
+import com.example.demo.responseModels.InvoiceHistoryResponseModel;
+import com.example.demo.service.BoughtProductHistoryServiceInterface;
 import com.example.demo.service.InvoiceHistoryServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,6 +20,9 @@ public class InvoiceHistoryController {
 
     @Autowired
     private InvoiceHistoryServiceInterface invoiceHistoryServiceInterface;
+
+    @Autowired
+    private BoughtProductHistoryServiceInterface boughtProductHistoryServiceInterface;
 
     public InvoiceHistoryController(InvoiceHistoryServiceInterface invoiceHistoryServiceInterface) {
         this.invoiceHistoryServiceInterface = invoiceHistoryServiceInterface;
@@ -42,4 +44,18 @@ public class InvoiceHistoryController {
           throw e;
         }
     }
+
+    @GetMapping("/invoiceHistoryById/{invoice_id}")
+    public InvoiceHistoryResponseModel getInvoiceById(@PathVariable("invoice_id") Long invoice_id){
+        InvoiceHistoryResponseModel response = new InvoiceHistoryResponseModel();
+        InvoiceHistoryEntity invoiceHistory = invoiceHistoryServiceInterface.getInvoiceHistoryByInvoiceId(invoice_id);
+        List<BoughtProductHistory> boughtProductHistory = boughtProductHistoryServiceInterface.getHistoryByInvoiceId(invoice_id);
+        response.setId(invoiceHistory.getId());
+        response.setInvoice_id(invoice_id);
+        response.setTotal_amount(invoiceHistory.getTotal_amount());
+        response.setCustomer(invoiceHistory.getCustomer());
+        response.setProducts(boughtProductHistory);
+        return response;
+    }
+
 }

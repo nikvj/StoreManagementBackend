@@ -5,6 +5,8 @@ import com.example.demo.repository.BoughtProductHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BoughtProductHistoryService implements BoughtProductHistoryServiceInterface{
     @Autowired
@@ -12,5 +14,11 @@ public class BoughtProductHistoryService implements BoughtProductHistoryServiceI
     @Override
     public void addBoughtHistory(BoughtProductHistory boughtProductHistory) {
         boughtProductHistoryRepository.save(boughtProductHistory);
+    }
+
+    @Override
+    public List<BoughtProductHistory> getHistoryByInvoiceId(Long invoice_id) {
+        List<BoughtProductHistory> list = boughtProductHistoryRepository.boughtProductHistoryByInvoiceId(invoice_id);
+        return list;
     }
 }
