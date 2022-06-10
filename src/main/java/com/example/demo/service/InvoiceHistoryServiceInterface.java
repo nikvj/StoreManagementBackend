@@ -2,9 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.entity.CustomerEntity;
 import com.example.demo.entity.InvoiceHistoryEntity;
-import com.example.demo.entity.ProductEntity;
 import com.example.demo.models.Customer;
-import com.example.demo.models.InvoiceHistory;
 import com.example.demo.requestModels.BoughtProductsRequestModel;
 
 import java.util.List;
@@ -16,4 +14,6 @@ public interface InvoiceHistoryServiceInterface {
     Boolean addBoughtProductToHistory(List<BoughtProductsRequestModel> productsRequestModelList, Long invoice_id);
 
     InvoiceHistoryEntity getInvoiceHistoryByInvoiceId(Long invoice_id);
+
+    List<InvoiceHistoryEntity> getInvoiceHistory();
 }

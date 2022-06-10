@@ -6,14 +6,12 @@ import com.example.demo.responseModels.IdResponse;
 import com.example.demo.service.CustomerServiceInterface;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/customer/")
-public class AddCustomer {
+@CrossOrigin("*")
+public class CustomerController {
     @Autowired
     CustomerServiceInterface customerServiceInterface;
 
@@ -26,5 +24,16 @@ public class AddCustomer {
         IdResponse response = new IdResponse();
         response.setId(customerId);
         return response;
+    }
+
+    @GetMapping("/customerByContact/{contact}")
+    public Customer getCustomerByContact(@PathVariable("contact") Long contact){
+        CustomerEntity customerEntity = customerServiceInterface.getCustomerByContact(contact);
+        Customer customer = new Customer();
+        if (customerEntity != null){
+            BeanUtils.copyProperties(customerEntity, customer);
+            return customer;
+        }
+       return customer;
     }
 }
